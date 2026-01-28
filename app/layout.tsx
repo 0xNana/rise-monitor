@@ -13,7 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="h-screen overflow-hidden">{children}</body>
+      <body className="h-screen overflow-hidden">
+        <div className="h-full w-full overflow-hidden">
+          {children}
+        </div>
+      </body>
     </html>
   )
 }

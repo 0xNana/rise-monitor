@@ -14,26 +14,26 @@ export default function Header({ timePeriod, onTimePeriodChange }: HeaderProps =
   const isDashboard = pathname === '/'
   
   return (
-    <header className="h-16 border-b border-strict-border flex items-center justify-between px-6 bg-black z-10 shrink-0">
-      <div className="flex items-center gap-8">
-        <div className="flex flex-col gap-0.5">
-          <h2 className="text-slate-100 text-lg font-bold tracking-tight uppercase leading-none">{pageTitle}</h2>
+    <header className="h-16 border-b border-strict-border flex items-center justify-between pl-12 lg:pl-6 px-3 sm:px-6 bg-black z-10 shrink-0">
+      <div className="flex items-center gap-2 sm:gap-4 lg:gap-8 min-w-0 flex-1">
+        <div className="flex flex-col gap-0.5 min-w-0 flex-1">
+          <h2 className="text-slate-100 text-sm sm:text-base lg:text-lg font-bold tracking-tight uppercase leading-none">{pageTitle}</h2>
           {pageSubtitle && (
-            <span className="text-primary text-[10px] font-mono tracking-widest uppercase opacity-80">
+            <span className="text-primary text-[9px] sm:text-[10px] font-mono tracking-widest uppercase opacity-80 hidden sm:block">
               {pageSubtitle}
             </span>
           )}
         </div>
         {isHistory && (
-          <div className="hidden lg:flex gap-4 items-center">
+          <div className="hidden xl:flex gap-4 items-center">
             <span className="text-slate-500 text-[10px] font-mono tracking-tighter uppercase">View: ANALYTICAL_CHART</span>
             <span className="text-slate-500 text-[10px] font-mono tracking-tighter uppercase">Metric: LATENCY_MS</span>
           </div>
         )}
         {isDashboard && (
           <>
-            <div className="h-8 w-px bg-strict-border"></div>
-            <div className="flex items-center gap-3 px-3 py-1.5 border border-dashed border-strict-border/60 bg-white/5">
+            <div className="hidden md:block h-8 w-px bg-strict-border"></div>
+            <div className="hidden md:flex items-center gap-3 px-3 py-1.5 border border-dashed border-strict-border/60 bg-white/5">
               <span className="text-[9px] font-mono text-muted-slate uppercase">Comparison Mode:</span>
               <div className="flex items-center gap-2">
                 <div className="w-8 h-4 bg-slate-800 border border-slate-700 relative cursor-pointer group">
@@ -49,13 +49,13 @@ export default function Header({ timePeriod, onTimePeriodChange }: HeaderProps =
           </>
         )}
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 sm:gap-4 shrink-0">
         {isHistory && (
           <>
             <div className="flex border border-strict-border bg-[#0a0a0a]">
               <button 
                 onClick={() => onTimePeriodChange?.('24h')}
-                className={`px-3 py-1.5 text-[10px] font-bold border-r border-strict-border ${
+                className={`px-2 sm:px-3 py-1.5 text-[9px] sm:text-[10px] font-bold border-r border-strict-border ${
                   timePeriod === '24h' ? 'bg-primary/10 text-primary' : 'text-slate-500 hover:text-slate-300'
                 }`}
               >
@@ -63,7 +63,7 @@ export default function Header({ timePeriod, onTimePeriodChange }: HeaderProps =
               </button>
               <button 
                 onClick={() => onTimePeriodChange?.('7d')}
-                className={`px-3 py-1.5 text-[10px] font-bold border-r border-strict-border ${
+                className={`px-2 sm:px-3 py-1.5 text-[9px] sm:text-[10px] font-bold border-r border-strict-border ${
                   timePeriod === '7d' ? 'bg-primary/10 text-primary' : 'text-slate-500 hover:text-slate-300'
                 }`}
               >
@@ -71,28 +71,28 @@ export default function Header({ timePeriod, onTimePeriodChange }: HeaderProps =
               </button>
               <button 
                 onClick={() => onTimePeriodChange?.('30d')}
-                className={`px-3 py-1.5 text-[10px] font-bold border-l border-strict-border ${
+                className={`px-2 sm:px-3 py-1.5 text-[9px] sm:text-[10px] font-bold border-l border-strict-border ${
                   timePeriod === '30d' ? 'bg-primary/10 text-primary' : 'text-slate-500 hover:text-slate-300'
                 }`}
               >
                 30D
               </button>
             </div>
-            <button className="size-8 border border-strict-border flex items-center justify-center hover:bg-white/5">
-              <span className="material-symbols-outlined text-[18px]">calendar_today</span>
+            <button className="size-7 sm:size-8 border border-strict-border flex items-center justify-center hover:bg-white/5">
+              <span className="material-symbols-outlined text-[16px] sm:text-[18px]">calendar_today</span>
             </button>
           </>
         )}
         {isDashboard && (
           <>
             <div className="flex border border-strict-border bg-[#0a0a0a]">
-              <button className="px-3 py-1.5 text-[10px] font-bold border-r border-strict-border text-slate-500 hover:text-slate-300">24H</button>
-              <button className="px-3 py-1.5 text-[10px] font-bold border-r border-strict-border text-slate-500 hover:text-slate-300">48H</button>
-              <button className="px-3 py-1.5 text-[10px] font-bold bg-primary/10 text-primary">7D</button>
-              <button className="px-3 py-1.5 text-[10px] font-bold border-l border-strict-border text-slate-500 hover:text-slate-300">30D</button>
+              <button className="px-2 sm:px-3 py-1.5 text-[9px] sm:text-[10px] font-bold border-r border-strict-border text-slate-500 hover:text-slate-300">24H</button>
+              <button className="px-2 sm:px-3 py-1.5 text-[9px] sm:text-[10px] font-bold border-r border-strict-border text-slate-500 hover:text-slate-300">48H</button>
+              <button className="px-2 sm:px-3 py-1.5 text-[9px] sm:text-[10px] font-bold bg-primary/10 text-primary">7D</button>
+              <button className="px-2 sm:px-3 py-1.5 text-[9px] sm:text-[10px] font-bold border-l border-strict-border text-slate-500 hover:text-slate-300">30D</button>
             </div>
-            <button className="size-8 border border-strict-border flex items-center justify-center hover:bg-white/5">
-              <span className="material-symbols-outlined text-[18px]">settings</span>
+            <button className="size-7 sm:size-8 border border-strict-border flex items-center justify-center hover:bg-white/5">
+              <span className="material-symbols-outlined text-[16px] sm:text-[18px]">settings</span>
             </button>
           </>
         )}

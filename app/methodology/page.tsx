@@ -3,12 +3,12 @@ import Header from '@/components/Header'
 
 export default function MethodologyPage() {
   return (
-    <div className="flex h-full w-full">
+    <div className="flex h-full w-full bg-[var(--bg-deep)]">
       <Sidebar />
-      <main className="flex-1 flex flex-col h-full overflow-hidden relative">
+      <main className="flex-1 flex flex-col h-full overflow-hidden relative bg-[var(--bg-deep)]">
         <Header />
         <div className="flex-1 overflow-y-auto p-4">
-          <div className="max-w-4xl mx-auto px-8 py-12">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
             <header className="mb-12 border-b border-strict-border pb-8">
               <div className="flex items-center gap-2 text-primary mb-4">
                 <span className="text-[11px] font-mono uppercase tracking-[0.2em]">Specifications // Core</span>

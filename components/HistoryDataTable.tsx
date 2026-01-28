@@ -8,7 +8,11 @@ interface HistoryPoint {
   p99: number
 }
 
-export default function DataTable() {
+interface HistoryDataTableProps {
+  timePeriod?: '24h' | '7d' | '30d'
+}
+
+export default function HistoryDataTable({ timePeriod = '7d' }: HistoryDataTableProps) {
   const [data, setData] = useState<HistoryPoint[]>([])
 
   useEffect(() => {
@@ -16,15 +20,25 @@ export default function DataTable() {
       .then(r => r.json())
       .then(data => {
         if (Array.isArray(data) && data.length > 0) {
+          // Filter data based on time period
+          let filteredData = data
+          if (timePeriod === '24h') {
+            filteredData = data.slice(-24)
+          } else if (timePeriod === '7d') {
+            filteredData = data.slice(-168)
+          } else if (timePeriod === '30d') {
+            filteredData = data.slice(-720)
+          }
+          
           // Get last 10 entries, most recent first
-          const last10 = data.slice(-10).reverse()
+          const last10 = filteredData.slice(-10).reverse()
           setData(last10.slice(0, 10))
         } else {
           setData([])
         }
       }) 
       .catch(err => console.error('Failed to fetch history:', err))
-  }, [])
+  }, [timePeriod])
 
   const formatTimestamp = (time: string) => {
     // Convert time string to full timestamp format

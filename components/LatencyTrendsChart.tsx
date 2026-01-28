@@ -59,11 +59,11 @@ export default function LatencyTrendsChart() {
   const p999Path = generatePath(data.map(d => d.p99))
 
   return (
-    <section className="strict-card flex flex-col min-h-[500px] shrink-0">
-      <div className="p-3 border-b border-strict-border bg-black/20 flex flex-wrap justify-between items-center gap-4">
-        <div className="flex items-center gap-6">
-          <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Latency Trends</span>
-          <div className="flex items-center gap-3 overflow-x-auto pb-1 md:pb-0">
+    <section className="strict-card flex flex-col min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] shrink-0">
+      <div className="p-2 sm:p-3 border-b border-strict-border bg-black/20 flex flex-wrap justify-between items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-3 sm:gap-6 min-w-0">
+          <span className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest whitespace-nowrap">Latency Trends</span>
+          <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-1 md:pb-0">
             <button 
               onClick={() => setActiveMetrics({ ...activeMetrics, p999: !activeMetrics.p999 })}
               className={`flex items-center gap-2 px-2 py-1 border ${activeMetrics.p999 ? 'bg-primary/10 border-primary/30' : 'border-strict-border opacity-40 hover:opacity-100'}`}
@@ -93,16 +93,16 @@ export default function LatencyTrendsChart() {
         </div>
       </div>
       
-      <div className="flex-1 p-8 relative flex flex-col min-h-[350px]">
+      <div className="flex-1 px-2 sm:px-4 lg:px-6 pt-4 sm:pt-6 lg:pt-8 pb-6 sm:pb-8 lg:pb-10 relative flex flex-col min-h-[250px] sm:min-h-[300px] lg:min-h-[350px]">
         <div className="flex-1 relative">
-          <div className="absolute -left-14 top-1/2 -rotate-90 text-[10px] font-mono text-muted-slate uppercase tracking-widest">
+          <div className="absolute -left-10 sm:-left-14 top-1/2 -rotate-90 text-[9px] sm:text-[10px] font-mono text-muted-slate uppercase tracking-widest hidden sm:block">
             Latency MS
           </div>
-          <div className="w-full h-full border-l border-b border-strict-border relative">
+          <div className="w-full h-full border-l border-b border-strict-border relative pr-8 sm:pr-10">
             <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
               {[800, 600, 400, 200, 0].map((value) => (
                 <div key={value} className="w-full border-t border-white/[0.03] flex justify-end items-start pr-2 pt-1">
-                  <span className="text-[8px] font-mono text-slate-600">{value}ms</span>
+                  <span className="text-[8px] font-mono text-slate-500">{value}ms</span>
                 </div>
               ))}
             </div>
@@ -117,6 +117,40 @@ export default function LatencyTrendsChart() {
                 <path d={p999Path} fill="none" stroke="var(--neon-cyan)" strokeWidth="2.5" />
               )}
             </svg>
+          </div>
+          {/* Horizontal time labels */}
+          <div className="absolute bottom-0 left-0 right-0 border-t border-strict-border pt-1 px-2 sm:px-4 lg:px-6 pr-8 sm:pr-10">
+            <div className="flex justify-between items-center w-full">
+              {data.length > 0 ? (
+                <>
+                  {data.length <= 5 ? (
+                    // Show all labels if 5 or fewer data points
+                    data.map((point, index) => (
+                      <span key={index} className="text-[8px] sm:text-[9px] font-mono text-slate-500 whitespace-nowrap">
+                        {point.time}
+                      </span>
+                    ))
+                  ) : (
+                    // Show first, middle, and last labels for more data points
+                    <>
+                      <span className="text-[8px] sm:text-[9px] font-mono text-slate-500 whitespace-nowrap">
+                        {data[0].time}
+                      </span>
+                      {data.length > 2 && (
+                        <span className="text-[8px] sm:text-[9px] font-mono text-slate-500 whitespace-nowrap hidden sm:block">
+                          {data[Math.floor(data.length / 2)].time}
+                        </span>
+                      )}
+                      <span className="text-[8px] sm:text-[9px] font-mono text-slate-500 whitespace-nowrap">
+                        {data[data.length - 1].time}
+                      </span>
+                    </>
+                  )}
+                </>
+              ) : (
+                <span className="text-[8px] sm:text-[9px] font-mono text-slate-500">No data</span>
+              )}
+            </div>
           </div>
         </div>
       </div>

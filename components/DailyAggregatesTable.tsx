@@ -104,43 +104,45 @@ export default function DailyAggregatesTable({ timePeriod = '7d' }: DailyAggrega
 
   return (
     <div className="strict-card overflow-hidden">
-      <div className="p-3 border-b border-strict-border bg-black/20 flex justify-between items-center">
-        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Daily Aggregates</span>
-        <button className="flex items-center gap-1 text-[9px] font-mono text-primary hover:underline">
-          <span className="material-symbols-outlined text-[12px]">download</span> Export Data
+      <div className="p-2 sm:p-3 border-b border-strict-border bg-black/20 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+        <span className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest">Daily Aggregates</span>
+        <button className="flex items-center gap-1 text-[8px] sm:text-[9px] font-mono text-primary hover:underline">
+          <span className="material-symbols-outlined text-[11px] sm:text-[12px]">download</span> Export Data
         </button>
       </div>
-      <div className="overflow-x-auto">
-        <table className="w-full text-left text-[11px]">
-          <thead className="bg-black text-muted-slate uppercase tracking-tighter font-bold border-b border-strict-border">
-            <tr>
-              <th className="p-3 font-mono">Date</th>
-              <th className="p-3 text-right font-mono">Avg P50</th>
-              <th className="p-3 text-right font-mono">Avg P95</th>
-              <th className="p-3 text-right font-mono">Max P99</th>
-              <th className="p-3 text-right font-mono">Std Dev</th>
-              <th className="p-3 text-right font-mono">Samples</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-strict-border font-mono">
-            {aggregates.length > 0 ? (
-              aggregates.map((agg, index) => (
-                <tr key={index} className="hover:bg-white/[0.02]">
-                  <td className="p-3 text-white font-bold uppercase">{agg.date}</td>
-                  <td className="p-3 text-right text-slate-400">{agg.avgP50.toFixed(1)}ms</td>
-                  <td className="p-3 text-right text-slate-400">{agg.avgP95.toFixed(1)}ms</td>
-                  <td className="p-3 text-right text-primary font-bold">{agg.maxP99.toFixed(1)}ms</td>
-                  <td className="p-3 text-right text-slate-500">±{agg.stdDev.toFixed(1)}</td>
-                  <td className="p-3 text-right text-slate-500">{agg.samples}</td>
-                </tr>
-              ))
-            ) : (
+      <div className="overflow-x-auto -mx-2 sm:mx-0">
+        <div className="inline-block min-w-full align-middle">
+          <table className="w-full text-left text-[10px] sm:text-[11px]">
+            <thead className="bg-black text-muted-slate uppercase tracking-tighter font-bold border-b border-strict-border">
               <tr>
-                <td colSpan={6} className="p-3 text-center text-slate-500">No data available</td>
+                <th className="p-2 sm:p-3 font-mono whitespace-nowrap">Date</th>
+                <th className="p-2 sm:p-3 text-right font-mono whitespace-nowrap">Avg P50</th>
+                <th className="p-2 sm:p-3 text-right font-mono whitespace-nowrap">Avg P95</th>
+                <th className="p-2 sm:p-3 text-right font-mono whitespace-nowrap">Max P99</th>
+                <th className="p-2 sm:p-3 text-right font-mono whitespace-nowrap">Std Dev</th>
+                <th className="p-2 sm:p-3 text-right font-mono whitespace-nowrap">Samples</th>
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-strict-border font-mono">
+              {aggregates.length > 0 ? (
+                aggregates.map((agg, index) => (
+                  <tr key={index} className="hover:bg-white/[0.02]">
+                    <td className="p-2 sm:p-3 text-white font-bold uppercase whitespace-nowrap">{agg.date}</td>
+                    <td className="p-2 sm:p-3 text-right text-slate-400 whitespace-nowrap">{agg.avgP50.toFixed(1)}ms</td>
+                    <td className="p-2 sm:p-3 text-right text-slate-400 whitespace-nowrap">{agg.avgP95.toFixed(1)}ms</td>
+                    <td className="p-2 sm:p-3 text-right text-primary font-bold whitespace-nowrap">{agg.maxP99.toFixed(1)}ms</td>
+                    <td className="p-2 sm:p-3 text-right text-slate-500 whitespace-nowrap">±{agg.stdDev.toFixed(1)}</td>
+                    <td className="p-2 sm:p-3 text-right text-slate-500 whitespace-nowrap">{agg.samples}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={6} className="p-3 text-center text-slate-500">No data available</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   )
